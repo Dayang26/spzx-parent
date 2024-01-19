@@ -12,4 +12,7 @@ public interface ProductService {
     //列表 条件分页查询
     PageInfo<Product> findByPage(Integer page, Integer limit, ProductDto productDto);
 
+
+    //    添加
+    void save(Product product);
 }

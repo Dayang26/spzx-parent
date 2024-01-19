@@ -1,6 +1,7 @@
 package com.snowline.spzx.manager.mapper;
 
 import com.snowline.spzx.model.dto.product.CategoryBrandDto;
+import com.snowline.spzx.model.entity.product.Brand;
 import com.snowline.spzx.model.entity.product.CategoryBrand;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -25,4 +26,9 @@ public interface CategoryBrandMapper {
 
     //添加
     void save(CategoryBrand categoryBrand);
+
+
+
+    //根据分类id查询对应品牌数据
+    List<Brand> findBrandByCategoryId(Long categoryId);
 }

@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.snowline.spzx.manager.mapper.CategoryBrandMapper;
 import com.snowline.spzx.manager.service.CategoryBrandService;
 import com.snowline.spzx.model.dto.product.CategoryBrandDto;
+import com.snowline.spzx.model.entity.product.Brand;
 import com.snowline.spzx.model.entity.product.CategoryBrand;
 import com.snowline.spzx.model.entity.system.SysRole;
 import org.springframework.beans.BeanUtils;
@@ -45,9 +46,16 @@ public class CategoryBrandServiceImpl implements CategoryBrandService {
     }
 
 
-//    添加
+    //    添加
     @Override
     public void save(CategoryBrand categoryBrand) {
         categoryBrandMapper.save(categoryBrand);
+    }
+
+
+    //根据分类id查询对应品牌数据
+    @Override
+    public List<Brand> findBrandByCategoryId(Long categoryId) {
+        return categoryBrandMapper.findBrandByCategoryId(categoryId);;
     }
 }

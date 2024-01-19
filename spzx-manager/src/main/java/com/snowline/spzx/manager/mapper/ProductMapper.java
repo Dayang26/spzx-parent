@@ -16,4 +16,8 @@ import java.util.List;
 public interface ProductMapper {
     //列表 条件分页查询
     List<Product> findByPage(ProductDto productDto);
+
+
+    //保存商品基本信息 product表
+    void save(Product product);
 }

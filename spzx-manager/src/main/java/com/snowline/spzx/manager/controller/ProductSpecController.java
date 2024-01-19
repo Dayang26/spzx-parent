@@ -50,4 +50,14 @@ public class ProductSpecController {
         return Result.build(null, ResultCodeEnum.SUCCESS);
     }
 
+
+    //查询所有商品规格
+    @GetMapping("/findAll")
+    public Result findAll() {
+        return Result.build(
+                productSpecService.findAll(),
+                ResultCodeEnum.SUCCESS);
+    }
+
+
 }
