@@ -43,10 +43,11 @@ public class BrandController {
     }
 
 
-    //  TODO 删除
-
-
     //  TODO 修改
+
+
+
+    //  TODO 删除
     @DeleteMapping("/deleteById/{id}")
     public Result deleteById(@PathVariable("id") Integer id) {
 
