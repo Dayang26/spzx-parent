@@ -41,15 +41,14 @@ public class BrandController {
         brandService.save(brand);
         return Result.build(null, ResultCodeEnum.SUCCESS);
     }
+    
+    //  TODO 修改
 
 
     //  TODO 删除
-
-
-    //  TODO 修改
     @DeleteMapping("/deleteById/{id}")
     public Result deleteById(@PathVariable("id") Integer id) {
-
+        System.out.println("123123 hot-fix");
         return Result.build(null, ResultCodeEnum.SUCCESS);
     }
 
