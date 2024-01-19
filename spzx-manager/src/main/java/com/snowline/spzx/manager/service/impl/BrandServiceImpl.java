@@ -52,6 +52,5 @@ public class BrandServiceImpl implements BrandService {
 //    删除
     @Override
     public void deleteById(Integer id) {
-        //TODO
     }
 }
