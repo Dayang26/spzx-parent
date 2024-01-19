@@ -48,7 +48,7 @@ public class BrandController {
     //  TODO 删除
     @DeleteMapping("/deleteById/{id}")
     public Result deleteById(@PathVariable("id") Integer id) {
-        System.out.println("123123 hot-fix");
+        brandService.deleteById(id);
         return Result.build(null, ResultCodeEnum.SUCCESS);
     }
 

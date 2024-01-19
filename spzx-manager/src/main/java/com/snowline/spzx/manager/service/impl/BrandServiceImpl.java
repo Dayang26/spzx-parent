@@ -47,4 +47,11 @@ public class BrandServiceImpl implements BrandService {
 
         return list;
     }
+
+
+//    删除
+    @Override
+    public void deleteById(Integer id) {
+        //TODO
+    }
 }
