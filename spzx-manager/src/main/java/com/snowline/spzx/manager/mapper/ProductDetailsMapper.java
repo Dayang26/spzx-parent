@@ -20,4 +20,8 @@ public interface ProductDetailsMapper {
 
     //    修改product-details
     void updateById(ProductDetails productDetails);
+
+
+    //根据商品id 删除product-details表
+    void deleteByProductId(Long id);
 }

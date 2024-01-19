@@ -51,7 +51,6 @@
     </insert>
 
 
-
     <select id="findProductSkuByProductId" resultMap="productSkuMap">
         select
         <include refid="columns"/>
@@ -62,7 +61,7 @@
     </select>
 
 
-    <update id="updateById" >
+    <update id="updateById">
         update product_sku set
         <if test="skuCode != null and skuCode != ''">
             sku_code = #{skuCode},
@@ -103,5 +102,14 @@
         update_time = now()
         where
         id = #{id}
+    </update>
+
+
+    <!--    //根据商品id 删除product—sku表-->
+    <update id="deleteByProductId">
+        update product_sku
+        set update_time = now(),
+            is_deleted  = 1
+        where product_id = #{productId}
     </update>
 </mapper>

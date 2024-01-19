@@ -21,6 +21,10 @@ public interface ProductSkuMapper {
     List<ProductSku> findProductSkuByProductId(Long id);
 
 
-//    修改product-sku
+    //    修改product-sku
     void updateById(ProductSku productSku);
+
+
+    //根据商品id 删除product—sku表
+    void deleteByProductId(Long id);
 }

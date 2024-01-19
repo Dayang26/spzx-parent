@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.snowline.spzx.manager.mapper.ProductDetailsMapper;
 import com.snowline.spzx.manager.mapper.ProductMapper;
 import com.snowline.spzx.manager.mapper.ProductSkuMapper;
-import com.snowline.spzx.manager.mapper.ProductSpecMapper;
 import com.snowline.spzx.manager.service.ProductService;
 import com.snowline.spzx.model.dto.product.ProductDto;
 import com.snowline.spzx.model.entity.product.Product;
@@ -108,17 +107,59 @@ public class ProductServiceImpl implements ProductService {
 
         //修改product-sku
         List<ProductSku> productSkuList = product.getProductSkuList();
-        productSkuList.forEach(productSku -> {
-            productSkuMapper.updateById(productSku);
-        });
+        productSkuList.forEach(productSku -> productSkuMapper.updateById(productSku));
 
 
         //修改product-details
         String detailsImageUrls = product.getDetailsImageUrls();
 
-        ProductDetails  productDetails = productDetailsMapper.findProductDetailsByProductId(product.getId());
+        ProductDetails productDetails = productDetailsMapper.findProductDetailsByProductId(product.getId());
         productDetails.setImageUrls(detailsImageUrls);
         productDetailsMapper.updateById(productDetails);
 
+    }
+
+
+    //删除
+    @Override
+    public void deleteById(Long id) {
+        //根据商品id  删除product表
+        productMapper.deleteById(id);
+
+        //根据商品id 删除product—sku表
+        productSkuMapper.deleteByProductId(id);
+
+        //根据商品id 删除product-details表
+        productDetailsMapper.deleteByProductId(id);
+
+
+    }
+
+
+    //审核
+    @Override
+    public void updateAuditStatus(Long id, Integer auditStatus) {
+        Product product = new Product();
+        product.setId(id);  //设置商品id
+        if(auditStatus == 1) {
+            product.setAuditStatus(1);
+            product.setAuditMessage("审批通过");
+        } else {
+            product.setAuditStatus(-1);
+            product.setAuditMessage("审批不通过");
+        }
+        productMapper.updateById(product);
+    }
+
+    @Override
+    public void updateStatus(Long id, Integer status) {
+        Product product = new Product();
+        product.setId(id);
+        if(status == 1) {
+            product.setStatus(1);
+        } else {
+            product.setStatus(-1);
+        }
+        productMapper.updateById(product);
     }
 }

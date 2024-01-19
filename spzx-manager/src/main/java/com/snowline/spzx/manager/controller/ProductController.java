@@ -6,6 +6,7 @@ import com.snowline.spzx.model.dto.product.ProductDto;
 import com.snowline.spzx.model.entity.product.Product;
 import com.snowline.spzx.model.vo.common.Result;
 import com.snowline.spzx.model.vo.common.ResultCodeEnum;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,4 +54,27 @@ public class ProductController {
         return Result.build(null, ResultCodeEnum.SUCCESS);
     }
 
+
+    //删除
+    @DeleteMapping("/deleteById/{id}")
+    public Result deleteById(@Parameter(name = "id", description = "商品id", required = true) @PathVariable Long id) {
+        productService.deleteById(id);
+        return Result.build(null, ResultCodeEnum.SUCCESS);
+    }
+
+
+    //审核
+    @GetMapping("/updateAuditStatus/{id}/{auditStatus}")
+    public Result updateAuditStatus(@PathVariable Long id, @PathVariable Integer auditStatus) {
+        productService.updateAuditStatus(id, auditStatus);
+        return Result.build(null , ResultCodeEnum.SUCCESS) ;
+    }
+
+
+    //商品上下架
+    @GetMapping("/updateStatus/{id}/{status}")
+    public Result updateStatus(@PathVariable Long id, @PathVariable Integer status) {
+        productService.updateStatus(id, status);
+        return Result.build(null , ResultCodeEnum.SUCCESS) ;
+    }
 }

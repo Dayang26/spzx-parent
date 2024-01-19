@@ -122,7 +122,7 @@
         where p.id = #{id}
     </select>
 
-    <update id="updateById" >
+    <update id="updateById">
         update product set
         <if test="name != null and name != ''">
             name = #{name},
@@ -162,4 +162,12 @@
         id = #{id}
     </update>
 
+
+    <!--    //根据商品id  删除product表-->
+    <update id="deleteById">
+        update product
+        set update_time = now(),
+            is_deleted  = 1
+        where id = #{id}
+    </update>
 </mapper>
