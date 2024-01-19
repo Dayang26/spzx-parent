@@ -39,9 +39,11 @@ public class BrandController {
     @PostMapping("/save")
     public Result save(@RequestBody Brand brand) {
         brandService.save(brand);
-        System.out.println("1111111");
         return Result.build(null, ResultCodeEnum.SUCCESS);
     }
+
+
+    //  TODO 删除
 
 
     //  TODO 修改
@@ -50,8 +52,6 @@ public class BrandController {
 
         return Result.build(null, ResultCodeEnum.SUCCESS);
     }
-
-    //  TODO 删除
 
 
     //查询所有品牌
