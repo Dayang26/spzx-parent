@@ -45,7 +45,11 @@ public class BrandController {
 
 
     //  TODO 修改
+    @DeleteMapping("/deleteById/{id}")
+    public Result deleteById(@PathVariable("id") Integer id) {
 
+        return Result.build(null, ResultCodeEnum.SUCCESS);
+    }
 
     //  TODO 删除
 
@@ -57,9 +61,6 @@ public class BrandController {
         List<Brand> list = brandService.findAll();
         return Result.build(list, ResultCodeEnum.SUCCESS);
     }
-
-
-
 
 
 }
