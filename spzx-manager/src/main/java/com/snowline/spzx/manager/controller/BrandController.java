@@ -39,7 +39,7 @@ public class BrandController {
     @PostMapping("/save")
     public Result save(@RequestBody Brand brand) {
         brandService.save(brand);
-
+        System.out.println("1111111");
         return Result.build(null, ResultCodeEnum.SUCCESS);
     }
 
