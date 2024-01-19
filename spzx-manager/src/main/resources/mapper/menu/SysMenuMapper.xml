@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snowline.spzx.manager.mapper.SysMenuMapper">
+    <!--    //  查询所有菜单，返回list集合-->
+
+    <!-- 用于select查询公用抽取的列 -->
+    <resultMap id="sysMenuMap" type="com.snowline.spzx.model.entity.system.SysMenu" autoMapping="true"/>
+
+
+    <sql id="columns">
+        <if test="true">
+            id,parent_id,title,component,sort_value,status,create_time,update_time,is_deleted
+        </if>
+    </sql>
+
+
+    <select id="findAll" resultMap="sysMenuMap">
+        select
+        <include refid="columns"/>
+        from sys_menu
+        where is_deleted = 0
+        order by sort_value
+    </select>
+
+    <!--添加-->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_menu (id,
+                              parent_id,
+                              title,
+                              component,
+                              sort_value,
+                              status)
+        values (#{id},
+                #{parentId},
+                #{title},
+                #{component},
+                #{sortValue},
+                #{status})
+    </insert>
+
+    <!--    修改-->
+    <update id="update">
+        update sys_menu set
+        <if test="parentId != null and parentId != ''">
+            parent_id = #{parentId},
+        </if>
+        <if test="title != null and title != ''">
+            title = #{title},
+        </if>
+        <if test="component != null and component != ''">
+            component = #{component},
+        </if>
+        <if test="sortValue != null">
+            sort_value = #{sortValue},
+        </if>
+        <if test="status != null">
+            status = #{status},
+        </if>
+        update_time = now()
+        where
+        id = #{id}
+    </update>
+
+
+    <!--    根据Id删除-->
+    <update id="removeById">
+        update sys_menu
+        set is_deleted =1
+        where id = #{id}
+    </update>
+
+    <!--    //根据当前菜单id查询，是否包含子菜单-->
+    <select id="selectCountById" resultType="Integer">
+        select count(*)
+        from sys_menu
+        where parent_id = #{id}
+          and is_deleted = 0
+    </select>
+
+
+    <!--    //查询用户可以操作的菜单-->
+    <select id="findMenusByUserId" resultMap="sysMenuMap">
+        select distinct m.*
+        from sys_user as u
+                 join sys_user_role as ur on u.id = ur.user_id
+                 join sys_role as r on ur.role_id = r.id
+                 join sys_role_menu as rm on r.id = rm.role_id
+                 join sys_menu as m on rm.menu_id = m.id
+        where u.id = #{id}
+          and u.is_deleted = 0
+          and ur.is_deleted = 0
+          and r.is_deleted = 0
+          and rm.is_deleted = 0
+          and m.is_deleted = 0
+    </select>
+
+
+    <!--//获取当前添加菜单的父菜单&ndash;&gt;-->
+    <select id="getParentMenu" resultMap="sysMenuMap">
+        select
+        <include refid="columns"/>
+        from sys_menu
+        where id = #{parentId}
+    </select>
+
+</mapper>
