@@ -42,15 +42,13 @@ public class BrandController {
         return Result.build(null, ResultCodeEnum.SUCCESS);
     }
 
-
     //  TODO 修改
-
 
 
     //  TODO 删除
     @DeleteMapping("/deleteById/{id}")
     public Result deleteById(@PathVariable("id") Integer id) {
-
+        System.out.println("123123 hot-fix");
         return Result.build(null, ResultCodeEnum.SUCCESS);
     }
 
