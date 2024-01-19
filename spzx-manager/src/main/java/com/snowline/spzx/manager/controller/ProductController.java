@@ -39,4 +39,18 @@ public class ProductController {
     }
 
 
+    //根据商品id查询商品信息
+    @GetMapping("/getById/{id}")
+    public Result getById(@PathVariable("id") Long id) {
+        return Result.build(productService.getById(id), ResultCodeEnum.SUCCESS);
+    }
+
+
+    //保存修改的数据
+    @PostMapping("/updateById")
+    public Result update(@RequestBody Product product) {
+        productService.update(product);
+        return Result.build(null, ResultCodeEnum.SUCCESS);
+    }
+
 }

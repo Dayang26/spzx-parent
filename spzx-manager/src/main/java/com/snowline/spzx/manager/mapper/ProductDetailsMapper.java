@@ -12,8 +12,12 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ProductDetailsMapper {
 
 
-    //3 保存商品详细数据 product_details 表
+    //保存商品详细数据 product_details 表
     void save(ProductDetails productDetails);
 
+    //根据id查询商品详细信息 product_details
+    ProductDetails findProductDetailsByProductId(Long id);
 
+    //    修改product-details
+    void updateById(ProductDetails productDetails);
 }

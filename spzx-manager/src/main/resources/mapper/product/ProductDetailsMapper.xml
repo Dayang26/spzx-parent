@@ -15,5 +15,26 @@
                 0)
     </insert>
 
+    <!--    根据id查询商品详细信息 product_details-->
+    <select id="findProductDetailsByProductId" resultType="com.snowline.spzx.model.entity.product.ProductDetails">
+        select *
+        from product_details
+        where product_id = #{id}
+          and is_deleted = 0
+    </select>
 
+<!--    修改product-details-->
+    <update id="updateById" >
+        update product_details set
+        <if test="productId != null and productId != ''">
+            product_id = #{productId},
+        </if>
+        <if test="imageUrls != null and imageUrls != ''">
+            image_urls = #{imageUrls},
+        </if>
+        update_time = now()
+        where
+        id = #{id}
+    </update>
+    
 </mapper>
