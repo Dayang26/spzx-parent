@@ -35,7 +35,7 @@ public class ProductController {
     @PostMapping("/save")
     public Result save(@RequestBody Product product) {
         productService.save(product);
-        return Result.build(null, ResultCodeEnum.SUCCESS);\
+        return Result.build(null, ResultCodeEnum.SUCCESS);
     }
 
 
