@@ -49,6 +49,7 @@ public class BrandController {
     @DeleteMapping("/deleteById/{id}")
     public Result deleteById(@PathVariable("id") Integer id) {
         brandService.deleteById(id);
+        System.out.println("11111111111111111111111");
         return Result.build(null, ResultCodeEnum.SUCCESS);
     }
 
